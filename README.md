@@ -23,4 +23,8 @@ Run `dotnet new` and it will show you a list of available app options to build w
 
 ## Structure
 
-### Week 1
+Week | Day | Slide | Info/Resources
+--|--|--|--|
+1  | 1 | [Day 1]("slides/01-Learn.NETCore.pptx") | [Info & Resources](src/week-1/info.md#Day-1)
+1  | 2 | [Day 2]("slides/01-Learn.NETCore.pptx") | [Info & Resources](src/week-1/info.md#Day-2)
+1  | 3 | [Day 3]("slides/01-Learn.NETCore.pptx") | [Info & Resources](src/week-1/info.md#Day-3)
