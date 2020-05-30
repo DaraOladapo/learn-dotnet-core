@@ -14,10 +14,10 @@ namespace Lesson_21_Structures {
             // MyShape.Area=47;
             // Console.WriteLine(MyShape.Perimeter);
             // Console.WriteLine(MyShape.Area);
-            //     Console.WriteLine(MyOtherShape.Perimeter);
-            //    Console.WriteLine(MyOtherShape.Area);
-            // var _Length = double.Parse(Console.ReadLine());
-            // var _Breadth = double.Parse(Console.ReadLine());
+            // Console.WriteLine(MyOtherShape.Perimeter);
+            // Console.WriteLine(MyOtherShape.Area);
+            // double _Length = double.Parse(Console.ReadLine());
+            // double _Breadth = double.Parse(Console.ReadLine());
 
             // Rectangle MyRectangle = new Rectangle() {
             //     Length = _Length,
