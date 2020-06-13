@@ -15,8 +15,8 @@ namespace Lesson_2_InitializingVariables
          int MyInt=54;//whole number
          long MyLong=3564356;//64bit whole numbers
          double MyDouble=54.4;//numbers with decimal point
-         float MyFloat=534.5;//number with floating point
-         decimal MyDecimal=54435.5;//numbers with decimal values
+         float MyFloat=534.5F;//number with floating point
+         decimal MyDecimal=54435.5M;//numbers with decimal values
          char MyChar='b';//single character
          string MyString="Some nice string value";//collection of character
 
