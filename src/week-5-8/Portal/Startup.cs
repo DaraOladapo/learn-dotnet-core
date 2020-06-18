@@ -39,6 +39,7 @@ namespace Portal
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //TODO: EF Task as DI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

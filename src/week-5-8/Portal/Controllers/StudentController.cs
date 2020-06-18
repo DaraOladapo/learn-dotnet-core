@@ -4,42 +4,50 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Portal.Data;
 using Portal.Models.Data;
 
 namespace Portal.Controllers
 {
+    //TODO: Explain DB Context in details at Week 7 Sec 2
     public class StudentController : Controller
     {
-        List<Student> _Students = new List<Student>() {
-            new Student(){ FirstName = "Dara", LastName = "Oladapo", EmailAddress = "me@daraoladapo.com", ID = 1 },
-            new Student(){ FirstName = "Oluwadara", LastName = "Oladapo", EmailAddress = "dara@daraoladapo.com", ID = 2 },
-        };
-        // GET: StudentController
+        readonly ApplicationDbContext _DBContext;
+        public StudentController(ApplicationDbContext dbContext)
+        {
+            _DBContext = dbContext;
+        }
+      
         public ActionResult Index()
         {
+            var _Students = _DBContext.Students.ToList();
             return View(_Students);
         }
-
-        // GET: StudentController/Details/5
         public ActionResult Details(long id)
         {
-            var _Student = _Students.FirstOrDefault(opt => opt.ID == id);
+            var _Student = _DBContext.Students.FirstOrDefault(opt => opt.ID == id);
             return View(_Student);
         }
 
-        // GET: StudentController/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
-
-        // POST: StudentController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(IFormCollection Collection)
         {
             try
             {
+                var CreatedStudent = new Student()
+                {
+                    FirstName = Collection["FirstName"],
+                    LastName = Collection["LastName"],
+                    EmailAddress = Collection["EmailAddress"]
+                };
+                _DBContext.Students.Add(CreatedStudent);
+                _DBContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -51,7 +59,7 @@ namespace Portal.Controllers
         // GET: StudentController/Edit/5
         public ActionResult Edit(int id)
         {
-            var _Student = _Students.FirstOrDefault(opt => opt.ID == id);
+            var _Student = _DBContext.Students.FirstOrDefault(opt => opt.ID == id);
             return View(_Student);
         }
 
@@ -62,7 +70,7 @@ namespace Portal.Controllers
         {
             try
             {
-                var _Student = _Students.FirstOrDefault(opt => opt.ID == id);
+                var _Student = _DBContext.Students.FirstOrDefault(opt => opt.ID == id);
                 return RedirectToAction(nameof(Index));
             }
             catch

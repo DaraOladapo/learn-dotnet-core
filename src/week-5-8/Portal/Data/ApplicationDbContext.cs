@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Portal.Models.Data;
 
 namespace Portal.Data
 {
@@ -12,5 +13,6 @@ namespace Portal.Data
             : base(options)
         {
         }
+        public DbSet<Student> Students { get; set; }
     }
 }
