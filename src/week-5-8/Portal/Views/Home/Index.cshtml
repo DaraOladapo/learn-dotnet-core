@@ -4,5 +4,9 @@
 @model Portal.Models.Data.Student
 
 <div class="text-center">
-   
+   <h1>Welcome to Saturday's class.</h1>
+    @await Html.PartialAsync("~/Views/Shared/Components/Hello.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/Components/AnotherHello.cshtml")
+  
+
 </div>
