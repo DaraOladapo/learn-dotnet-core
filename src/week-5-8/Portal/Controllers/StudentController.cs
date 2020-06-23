@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Portal.Data;
+using Portal.Models.Binding;
 using Portal.Models.Data;
+using Portal.Models.View;
 
 namespace Portal.Controllers
 {
@@ -17,7 +19,7 @@ namespace Portal.Controllers
         {
             _DBContext = dbContext;
         }
-      
+
         public ActionResult Index()
         {
             var _Students = _DBContext.Students.ToList();
@@ -26,7 +28,14 @@ namespace Portal.Controllers
         public ActionResult Details(long id)
         {
             var _Student = _DBContext.Students.FirstOrDefault(opt => opt.ID == id);
-            return View(_Student);
+            var _StudentViewModel = new StudentViewModel()
+            {
+                ID=_Student.ID,
+                FirstName = _Student.FirstName,
+                LastName = _Student.LastName,
+                EmailAddress = _Student.EmailAddress
+            };
+            return View(_StudentViewModel);
         }
 
         [HttpGet]
@@ -34,11 +43,11 @@ namespace Portal.Controllers
         {
             return View();
         }
-        [HttpPost]
+        [HttpPost("add")]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection Collection)
         {
-            try
+             try
             {
                 var CreatedStudent = new Student()
                 {
@@ -55,7 +64,26 @@ namespace Portal.Controllers
                 return View();
             }
         }
-
+        [HttpPost]
+        public async Task<ActionResult<Student>> Create([FromBody]AddStudentBindingModel bindingModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var StudentToCreate=new Student(){
+                    FirstName=bindingModel.FirstName,
+                    LastName=bindingModel.LastName,
+                    EmailAddress=bindingModel.EmailAddress,
+                    CreatedDate=DateTime.Now
+                };
+                var StudentAdded=_DBContext.Students.Add(StudentToCreate).Entity;
+                await _DBContext.SaveChangesAsync();
+                return Ok(StudentAdded);
+            }
+            else
+            {
+                return BadRequest("Invalid input");
+            }
+        }
         // GET: StudentController/Edit/5
         public ActionResult Edit(int id)
         {
