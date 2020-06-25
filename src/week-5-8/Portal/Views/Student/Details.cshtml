@@ -1,7 +1,8 @@
 ﻿@model Portal.Models.View.StudentViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    //ViewData["Title"] = $"{Model.FullName}'s Data";
+    ViewData["Title"] = ViewBag.Name;
 }
 
 <h1>Details</h1>

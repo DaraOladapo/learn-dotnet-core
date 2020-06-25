@@ -35,9 +35,16 @@ namespace Portal.Controllers
                 LastName = _Student.LastName,
                 EmailAddress = _Student.EmailAddress
             };
-            return View(_StudentViewModel);
+            ViewBag.Name = _StudentViewModel.FullName;
+            TempData["Student"] = "Dara";
+            return RedirectToAction("AnotherDetail");
         }
-
+        public ActionResult AnotherDetail()
+        {
+            var Query = this.Request.QueryString;
+            ViewBag.Info = Query;
+            return View();
+        }
         [HttpGet]
         public ActionResult Create()
         {
